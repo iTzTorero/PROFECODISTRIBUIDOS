@@ -142,22 +142,22 @@
                         </div>
 
                         <div class=" myContainerAbs col-md-12">
-                            <form>
+                            <form action="RegistrarUsuario" method="post">
                             <div class="col-md-8">
-                                <input type="text" class="form-control myInput" placeholder="Usuario" aria-describedby="basic-addon1" required>
+                                <input name ="nombre" type="text" class="form-control myInput" placeholder="Nombre" aria-describedby="basic-addon1" required>
 
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control myInput" placeholder="Teléfono" aria-describedby="basic-addon1" required>
+                                <input name= "telefono" type="text" class="form-control myInput" placeholder="Teléfono" aria-describedby="basic-addon1" required>
 
                             </div>
                             <div class="col-md-8">
-                                <input type="email" class="form-control myInput" placeholder="Email" aria-describedby="basic-addon1" required>
+                                <input name="email" type="email" class="form-control myInput" placeholder="Email" aria-describedby="basic-addon1" required>
 
                             </div>
 
                             <div class="col-md-12">
-                                <select class="form-select myInput"   required>
+                                <select class="form-select myInput"  method= required>
                                     <option value="" disabled selected>Tipo de usuario</option>
                                     <option value="item 1">Mercado</option>
                                     <option value="item 2">Consumidor</option>
@@ -166,12 +166,12 @@
 
                             </div><br/><br/>
                             <div class="col-md-8">
-                                <input type="password" class="form-control myInput" placeholder="Constraseña" aria-describedby="basic-addon1" required>
+                                <input name= "contrasenia" type="password" class="form-control myInput" placeholder="Constraseña" aria-describedby="basic-addon1" required>
 
                             </div>
 
                             <div class="col-md-8">
-                                <button type="submit" class="btnReg btn-default form-control myButton">Registrarse</button>
+                                <button type="submit" class="btnReg btn-default form-control myButton" >Registrarse</button>
                             </div>
                             </form>
                         </div>

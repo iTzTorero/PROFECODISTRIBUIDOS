@@ -17,13 +17,12 @@ import restClient.ProfecoServiceRESTClient;
 
 /**
  *
- * @author crist
+ * @author Juan Pablo
  */
-@WebServlet(name = "inicia", urlPatterns = {"/InicioSesion"})
-public class InicioSesion extends HttpServlet {
+@WebServlet(name = "RegistrarUsuario", urlPatterns = {"/RegistrarUsuario"})
+public class RegistrarUsuario extends HttpServlet {
 
     ProfecoServiceRESTClient clienteProfeco = new ProfecoServiceRESTClient();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,7 +34,19 @@ public class InicioSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RegistrarUsuario</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RegistrarUsuario at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,33 +75,24 @@ public class InicioSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        processRequest(request, response);
+        
+        JSONObject json= new JSONObject();
+//        json.put("email", request.getParameter("email"));
+//        json.put("nombre", request.getParameter("nombre"));
+//        json.put("contrasenia", request.getParameter("contrasenia"));
+//        json.put("telefono", request.getParameter("telefono"));
+//        json.put("tipoUsuario", request.getParameter("tipoUsuario"));
 
-        String email = request.getParameter("email");
-        String psw = request.getParameter("psw");
+        json.put("email", "cris@profeco.gob.mx");
+        json.put("nombre", "Cristina Aguilar");
+        json.put("contrasenia", "123412");
+        json.put("telefono", "123123123");
+        json.put("tipoUsuario", "Profeco");
+        System.out.println(json.toString());
+        String jsonprueba = json.toString();
+        clienteProfeco.registrarUsuario(json.toString());
 
-        JSONObject jsonsolicitud = new JSONObject();
-        jsonsolicitud.put("email", email);
-        jsonsolicitud.put("contrasenia", psw);
-
-        String usuario = clienteProfeco.login(jsonsolicitud.toString());
-        if (!usuario.isEmpty()) {
-            response.sendRedirect("indexProfeco.jsp");
-        } else {
-            response.sendRedirect("login.jsp");
-
-        }
-
-//        if (email.equals("grupooxxomexico@gmail.com") && psw.equals("oxxo123")) {
-//            response.sendRedirect("indexMercado.jsp");
-//        } else if (email.equals("carminamoreno29@gmail.com") && psw.equals("monita")) {
-//            response.sendRedirect("indexConsumidor.jsp");
-//        } else if (email.equals("profeco.gob.mexico@gmail.com") && psw.equals("admin")) {
-//            response.sendRedirect("indexProfeco.jsp");
-//        } else {
-//            response.sendRedirect("index.jsp");
-//        }
     }
 
     /**
