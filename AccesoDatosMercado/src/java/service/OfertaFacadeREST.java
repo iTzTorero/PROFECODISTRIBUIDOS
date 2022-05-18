@@ -5,11 +5,9 @@
  */
 package service;
 
-import dbadmin.OfertaConnection;
 import entidades.Oferta;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,7 +18,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.json.JSONObject;
 
 /**
  *
@@ -29,29 +26,19 @@ import org.json.JSONObject;
 @javax.ejb.Stateless
 @Path("entidades.oferta")
 public class OfertaFacadeREST extends AbstractFacade<Oferta> {
-    OfertaConnection db = new OfertaConnection();
 
     @PersistenceContext(unitName = "AccesoDatosMercadoPU")
     private EntityManager em;
 
     public OfertaFacadeREST() {
         super(Oferta.class);
-        this.em = Persistence.createEntityManagerFactory("AccesoDatosMercadoPU").createEntityManager();
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Oferta entity) {
-        JSONObject jsonentity = new JSONObject(entity);
-        Oferta oferta = new Oferta();
-        oferta.setDescuento(jsonentity.getInt("descuento"));
-        oferta.setDuracion(jsonentity.getInt("duracion"));
-        oferta.setDescripcion(jsonentity.getString("descripcion"));
-        oferta.setIdmercado(jsonentity.getInt("idmercado"));
-        
-        db.insertarOferta(oferta);
-        super.create(oferta);
+        super.create(entity);
     }
 
     @PUT
@@ -64,7 +51,7 @@ public class OfertaFacadeREST extends AbstractFacade<Oferta> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        db.eliminarOferta(id);
+        super.remove(super.find(id));
     }
 
     @GET
