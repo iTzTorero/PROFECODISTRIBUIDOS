@@ -1,0 +1,97 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
+import restClient.ConsumidorServiceRESTClient;
+
+/**
+ *
+ * @author Juan Pablo
+ */
+@WebServlet(name = "RegistrarUsuario", urlPatterns = {"/RegistrarUsuario"})
+public class RegistrarUsuario extends HttpServlet {
+
+    ConsumidorServiceRESTClient clienteProfeco = new ConsumidorServiceRESTClient();
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+
+        JSONObject json = new JSONObject();
+//        json.put("email", request.getParameter("email"));
+//        json.put("nombre", request.getParameter("nombre"));
+//        json.put("contrasenia", request.getParameter("contrasenia"));
+//        json.put("telefono", request.getParameter("telefono"));
+//        json.put("tipoUsuario", request.getParameter("tipoUsuario"));
+        json.put("email", "juanpablo@gmail.com");
+        json.put("nombre", "Juan Pablo");
+        json.put("contrasenia", "123123");
+        json.put("telefono", "123123123");
+        json.put("tipoUsuario", "Consumidor");
+        System.out.println(json.toString());
+        String jsonprueba = json.toString();
+        clienteProfeco.registrarUsuario(json.toString());
+        response.sendRedirect("login.jsp");
+
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

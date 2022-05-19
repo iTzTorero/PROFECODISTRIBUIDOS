@@ -137,7 +137,7 @@
                         </div>
 
                         <div class=" myContainerAbs col-md-10  hidden-sm">
-                            <form>
+                            <form action="RegistrarProducto" method="post">
 
                                 <div class="col-md-8">
                                     <input type="text" class="form-control myInput" placeholder="Nombre del producto" aria-describedby="basic-addon1" required>
@@ -159,10 +159,6 @@
 
                                 </div>
 
-                                <div class="file-loading col-md-8">
-                                    <label for="imageUpload" class="buy2">Seleccionar imagenes</label>
-                                    <input type="file" id="imageUpload" accept="image/*" style="display: none">
-                                </div><br><br>
 
 
                                 <div class="col-md-8">

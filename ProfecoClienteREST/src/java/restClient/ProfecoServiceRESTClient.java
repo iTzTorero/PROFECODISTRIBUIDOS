@@ -34,7 +34,7 @@ public class ProfecoServiceRESTClient {
     }
 
     public String registrarUsuario(Object requestEntity) throws ClientErrorException {
-        return webTarget.path("registrar").request(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.TEXT_PLAIN), String.class);
+        return webTarget.path("login/registrar").request(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.TEXT_PLAIN), String.class);
     }
 
     public String login(Object requestEntity) throws ClientErrorException {

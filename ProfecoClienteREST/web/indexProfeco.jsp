@@ -3,7 +3,6 @@
     Created on : 4/05/2022, 05:13:42 PM
     Author     : crist
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,13 +84,7 @@
                                     <nav class="main-menu">
                                         <ul class="menu-area-main">
                                             <li class="active"> <a href="indexProfeco.jsp">Inicio</a> </li>
-
-                                            <li> <a href="sanciones.jsp">Sanción</a> </li>
-                                         
-                                  
-
-
-
+                                            <li> <a href="reportes.jsp">Reportes</a> </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -147,9 +140,9 @@
                     <div class="row">
                         <dir class="col-xl-12 col-lg-3 col-md-6 col-sm-12">
                             <div class="for_box">
-                                <i><a href="sanciones.jsp"><img src="icon/1.png"/></a></i>
+                                <i><a href="reportes.jsp"><img src="icon/1.png"/></a></i>
                                 <h3>Aplicar sanción</h3>
-                                <p>Aplica una sanción a supermercados</p>
+                                <p>Aplica una sanción a supermercados con reportes registrados</p>
                             </div>
                         </dir>
 

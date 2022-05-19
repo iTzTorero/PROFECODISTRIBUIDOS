@@ -78,18 +78,12 @@ public class RegistrarUsuario extends HttpServlet {
         processRequest(request, response);
         
         JSONObject json= new JSONObject();
-//        json.put("email", request.getParameter("email"));
-//        json.put("nombre", request.getParameter("nombre"));
-//        json.put("contrasenia", request.getParameter("contrasenia"));
-//        json.put("telefono", request.getParameter("telefono"));
-//        json.put("tipoUsuario", request.getParameter("tipoUsuario"));
+        json.put("email", request.getParameter("email"));
+        json.put("nombre", request.getParameter("nombre"));
+        json.put("contrasenia", request.getParameter("contrasenia"));
+        json.put("telefono", request.getParameter("telefono"));
+        json.put("tipoUsuario", request.getParameter("tipoUsuario"));
 
-        json.put("email", "cris@profeco.gob.mx");
-        json.put("nombre", "Cristina Aguilar");
-        json.put("contrasenia", "123412");
-        json.put("telefono", "123123123");
-        json.put("tipoUsuario", "Profeco");
-        System.out.println(json.toString());
         String jsonprueba = json.toString();
         clienteProfeco.registrarUsuario(json.toString());
 

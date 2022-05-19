@@ -19,9 +19,11 @@ import restClient.ProfecoServiceRESTClient;
  *
  * @author Juan Pablo
  */
-@WebServlet(name = "RegistrarReporte", urlPatterns = {"/RegistrarReporte"})
+@WebServlet(name = "RegistrarMulta", urlPatterns = {"/RegistrarMulta"})
 public class RegistrarMulta extends HttpServlet {
+
     ProfecoServiceRESTClient clienteProfeco = new ProfecoServiceRESTClient();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,19 +35,7 @@ public class RegistrarMulta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrarReporte</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistrarReporte at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,14 +64,17 @@ public class RegistrarMulta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
         processRequest(request, response);
-        
+
         JSONObject json = new JSONObject();
-        json.put("multa", 5000.00);
-        json.put("descripcion", "Ta muy caro");
-        json.put("idmercado", 2);
-        
-        clienteProfeco.registrarMulta(json.toString());
+        json.put("importe", 5000.00);
+        json.put("descripcion", "Publicidad falsa");
+        json.put("idmercado", 3);
+
+        String multa = clienteProfeco.registrarMulta(json.toString());
+        response.sendRedirect("reportes.jsp");
     }
 
     /**

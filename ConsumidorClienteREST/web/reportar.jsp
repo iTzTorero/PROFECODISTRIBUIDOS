@@ -139,9 +139,9 @@
                         </div>
 
                         <div class=" myContainerAbs col-md-10  hidden-sm">
-                            <form>
+                            <form action="Reportar" method="post">
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control myInput" placeholder="Descripción" aria-describedby="basic-addon1" required>
+                                    <input name="descripcion" type="text" class="form-control myInput" placeholder="Descripción" aria-describedby="basic-addon1" required>
 
                                 </div>
                                 <div class="col-md-8">

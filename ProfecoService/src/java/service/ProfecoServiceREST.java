@@ -5,6 +5,8 @@
  */
 package service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +47,7 @@ public class ProfecoServiceREST {
     private UsuariosRESTClient clienteUsuario = new UsuariosRESTClient();
     private MultaRESTClient clienteMulta = new MultaRESTClient();
     private ConsumidorRESTClient clienteConsumidor = new ConsumidorRESTClient();
+
     public ProfecoServiceREST() {
 
     }
@@ -53,9 +56,12 @@ public class ProfecoServiceREST {
     @POST
     @Path("login")
     @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String login(@FormParam("email") String email, @FormParam("contrasenia") String psw) {
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String login(String jsonlogin) {
 
+        JSONObject jsondatos = new JSONObject(jsonlogin);
+        String email = jsondatos.getString("email");
+        String psw = jsondatos.getString("contrasenia");
         ObjectMapper objectMapper = new ObjectMapper();
 
         List<UsuariosDTO> list = new ArrayList();
@@ -75,6 +81,7 @@ public class ProfecoServiceREST {
                 json.put("contrasenia", user.getContrasenia());
                 json.put("tipoUsuario", user.getTipoUsuario());
                 json.put("nombre", user.getNombre());
+                json.put("token", crearToken(user.getEmail()));
                 return json.toString();
             }
         }
@@ -82,7 +89,7 @@ public class ProfecoServiceREST {
     }
 
     @POST
-    @Path("registrar")
+    @Path("login/registrar")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public String registrarUsuario(String usuariojson) {
@@ -115,7 +122,17 @@ public class ProfecoServiceREST {
     @GET
     @Path("reportes")
     @Produces(MediaType.APPLICATION_JSON)
-    public String consultarReportes(){
-       return clienteConsumidor.consultarReportes();
+    public String consultarReportes() {
+        return clienteConsumidor.consultarReportes();
+    }
+
+    public String crearToken(String email) {
+        String token = null;
+        try {
+            com.auth0.jwt.algorithms.Algorithm alg = com.auth0.jwt.algorithms.Algorithm.HMAC256("porfabor");
+            token = JWT.create().withIssuer("auth0").withClaim("email", email).sign(alg);
+        } catch (JWTCreationException exception) {
+        }
+        return token;
     }
 }

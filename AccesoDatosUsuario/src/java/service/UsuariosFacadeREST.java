@@ -45,9 +45,9 @@ public class UsuariosFacadeREST extends AbstractFacade<Usuarios> {
     public String create(String entity) {
         JSONObject json = new JSONObject(entity);
         Usuarios usuario = new Usuarios();
-        usuario.setContrasenia(json.getString("contrasenia"));
         usuario.setEmail(json.getString("email"));
         usuario.setNombre(json.getString("nombre"));
+        usuario.setContrasenia(json.getString("contrasenia"));
         usuario.setTipoUsuario(json.getString("tipoUsuario"));
         usuario.setTelefono(json.getString("telefono"));
         //super.create(usuario);
